@@ -63,7 +63,7 @@ This is what we call *source data*. It is data contained in your application sta
       get(data) {
         return data.ids.map((messageId) => {
 
-          const message = messages[id];
+          const message = data.messages[id];
           return {
             ...message,
             comments: message.comments.map((commentId) => {
@@ -89,7 +89,7 @@ This is how a component could now display this list:
 ```javascript
 
 import React from 'react';
-import {Decorator as Cerebral} from 'cerebral-react';
+import {Decorator as Cerebral} from 'cerebral-view-react';
 
 @Cerebral({
   messages: ['messages', 'list']

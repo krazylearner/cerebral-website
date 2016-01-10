@@ -1,4 +1,4 @@
-# Compute (EXPERIMENTAL)
+# Compute
 
 Very often it is necessary to compute state. Some libraries do this inside the components, others do it inside the state store. With Cerebral you do it when state is extracted from Cerebral. This allows computed state to be run on any state store, it being Baobab or Immutable JS.
 
@@ -28,7 +28,7 @@ You use them the same way as normal state, though just referencing the computed 
 ```javascript
 
 import React from 'react';
-import {Decorator as Cerebral} from 'cerebral-react';
+import {Decorator as Cerebral} from 'cerebral-view-react';
 import displayedMessages from './computed/displayedMessages';
 
 @Cerebral({
@@ -64,7 +64,7 @@ You can also use them inside actions.
 
 import displayedMessages from '../computed/displayedMessages';
 
-function myAction(input, state) {
+function myAction({state}) {
   const messages = state.get(displayedMessages);
 }
 ```

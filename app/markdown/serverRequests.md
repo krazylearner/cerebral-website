@@ -7,7 +7,7 @@ Let us look at our signal first:
 
 import controller from './controller.js';
 
-const chain = [
+const appMounted = [
   setLoadingTodos,
   [
     getTodos, {
@@ -18,7 +18,9 @@ const chain = [
   unsetLoadingTodos
 ];
 
-controller.signal('appMounted', chain);
+controller.signals({
+  appMounted
+});
 ```
 
 In this example we will explicitly create all the actions we need. It is certainly possible to make this more dry using factories, but let us leave it at this for now.
@@ -27,7 +29,7 @@ The *setLoadingTodos* and *unsetLoadingTodos* actions are not so important here,
 
 ```javascript
 
-function getTodos(input, state, output, services) {
+function getTodos({services, output}) {
   services.ajax.get('/todos')
     .then((todos) => output.success({todos}))
     .catch((error) => output.error({error}));

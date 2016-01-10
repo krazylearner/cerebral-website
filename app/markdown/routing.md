@@ -17,8 +17,10 @@ import homeOpened from './signals/homeOpened';
 import messagesOpened from './signals/messagesOpened';
 import messageOpened from './signals/messageOpened';
 
-controller.signal('messagesOpened', messagesOpened);
-controller.signal('messageOpened', messageOpened);
+controller.signals({
+  messagesOpened,
+  messageOpened
+});
 ```
 
 When we want to open the messages we call the signal:
@@ -51,20 +53,22 @@ import homeOpened from './signals/homeOpened';
 import messagesOpened from './signals/messagesOpened';
 import messageOpened from './signals/messageOpened';
 
-controller.signal('homeOpened', homeOpened);
-controller.signal('messagesOpened', messagesOpened);
-controller.signal('messageOpened', messageOpened);
+controller.signals({
+  homeOpened,
+  messagesOpened,
+  messageOpened
+});
 
 Router(controller, {
   '/': 'homeOpened',
   '/messages': 'messagesOpened',
   '/messages/:id': 'messageOpened'
 }, {
-  query: true // Read about this below
-}).trigger();
+  mapper: {query: true} // Read about this below
+});
 ```
 
-The **trigger** method ensures that we handle the current route when the application loads up. The router checks the url and fires the signal related to the url. The url will be parsed and any payload will be passed on the signal. That means if you go to `example.com/messages/123` it will trigger the `messageOpened` signal with the payload `{id: '123'}`. But if you click a message in the list it will also trigger the `messageOpened` signal with the payload `{id: '456'}` and now the url will also update to `example.com/messages/456`. So it works both ways!
+Using the `cerebral-view-react` or `cerebral-angular` packages will automatically trigger the router, but you can run a `trigger` method manually if you do not use these packages. The router checks the url and fires the signal related to the url. The url will be parsed and any payload will be passed on the signal. That means if you go to `example.com/messages/123` it will trigger the `messageOpened` signal with the payload `{id: '123'}`. But if you click a message in the list it will also trigger the `messageOpened` signal with the payload `{id: '456'}` and now the url will also update to `example.com/messages/456`. So it works both ways!
 
 The important thing to understand here is that your application does not trigger urls to change its state. It triggers signals. Then you bind a route to a signal to allow a url to trigger the signal as well. That means:
 
@@ -85,13 +89,15 @@ In the example above, when navigating in the app, you have to go to */messages* 
 ```javascript
 
 ...
-controller.signal('messageOpened', [...messagesOpened, ...messageOpened]);
+controller.signals({
+  messageOpened: [...messagesOpened, ...messageOpened]
+});
 
 Router(controller, {
   '/': 'homeOpened',
   '/messages': 'messagesOpened',
   '/messages/:id': 'messageOpened'
-}).trigger();
+});
 ```
 
 With Cerebral you are already used to composing chains and actions together and this is also effective when creating routes. Now you might say, "I do not want to load my messages every time I open a message!". I completely agree and there are multiple ways to handle this. It depends on when you want to load the messages. But lets say you want to load them whenever you actually go to `/messages`. Inside your *messagesOpened* signal you can just check if there is an ID on the input. If there is an ID it means you are about to open a message, if not it means you are just opening the messages.
@@ -111,4 +117,4 @@ onMessageClick(id) {
 
 Since this signal is bound to a url Cerebral router will automatically make this part of the query, turning your url into `example.com/messages/123?withComments:true`. That means if you refresh or pass the url to somebody else it will pass `{id: '123', withComments: true}` as the payload to the signal, opening the message in the exact same way, with the comments.
 
-Notice here that we have `withComments:true`, not `withComment=true`. This is because Cerebral router uses the [URLON](https://github.com/vjeux/URLON) project to create serializable queries. As you can see it is very powerful.
+Notice here that we have `withComments:true`, not `withComments=true`. This is because Cerebral router uses the [URLON](https://github.com/vjeux/URLON) project to create serializable queries. As you can see it is very powerful.

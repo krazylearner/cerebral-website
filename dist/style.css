@@ -107,6 +107,12 @@
 .icon-map-signs:before {
 	content: "\f277";
 }
+.icon-th-large:before {
+    content: "\f009";
+}
+.icon-gamepad:before {
+    content: "\f11b";
+}
 
 html, body {
     margin: 0;
@@ -593,7 +599,6 @@ img {
   height: 100%;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 50px;
 }
 
 .submenu {

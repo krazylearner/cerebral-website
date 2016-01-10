@@ -26,16 +26,16 @@ class App extends React.Component {
     }
   }
   openGithub() {
-    window.open('http://www.github.com/christianalfoni/cerebral');
+    window.open('http://www.github.com/cerebral/cerebral');
   }
   createTweet() {
     window.open('https://twitter.com/share');
   }
   openChat() {
-    window.open('https://gitter.im/christianalfoni/cerebral');
+    window.open('https://discord.gg/0kIweV4bd2bwwsvH');
   }
   openRepo() {
-    window.open('https://github.com/christianalfoni/cerebral-website');
+    window.open('https://github.com/cerebral/cerebral-website/tree/master/app/markdown');
   }
   renderPage() {
     const pageStyle = {
@@ -78,10 +78,13 @@ class App extends React.Component {
             <i className="icon icon-github-square"> Project repo</i>
           </div>
           <div className="tweet" onClick={() => this.createTweet()}>
-            <i className="icon icon-twitter"> Tweet about Cerebral</i>
+            <i className="icon icon-twitter"> Tweet it!</i>
           </div>
           <div className="tweet" onClick={() => this.openChat()}>
             <i className="icon icon-comments"> Chat with us</i>
+          </div>
+          <div className="tweet" onClick={() => location.href = "/todomvc"}>
+            <i className="icon icon-gamepad"> Demo</i>
           </div>
         </div>
         <div ref="content" className="content" style={contentStyle}>
@@ -105,7 +108,7 @@ class App extends React.Component {
             </li>
           );
 
-          if (item.subContent) {
+          if (item.subContent && this.props.content === toPath(item.label)) {
             return [
               Item,
               <li key={item.label + '_sub'}>
@@ -120,7 +123,7 @@ class App extends React.Component {
                           subitem.icon ?
                             <span><i className={'icon icon-' + subitem.icon}/> {subitem.label}</span>
                           :
-                            subitem.label
+                            '• ' + subitem.label
                         }
                       </li>
                     );

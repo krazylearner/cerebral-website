@@ -1,5 +1,6 @@
 import MTRC from 'markdown-to-react-components';
 import Home from './Home.js';
+import Contributors from './Contributors.js';
 import install from './markdown/install.md';
 import react from './markdown/react.md';
 import angular from './markdown/angular.md';
@@ -19,9 +20,9 @@ import routing from './markdown/routing.md';
 import transitions from './markdown/transitions.md';
 import bestPractices from './markdown/best-practices.md';
 import structure from './markdown/structure.md';
-import recording from './markdown/recording.md';
 import getStarted from './markdown/get-started.md';
 import utilities from './markdown/utilities.md';
+import modules from './markdown/modules.md';
 import relational from './markdown/relational.md';
 import internetExplorer from './markdown/internetExplorer.md';
 import propsAndState from './markdown/propsAndState.md';
@@ -29,7 +30,6 @@ import responsibilities from './markdown/responsibilities.md';
 import compute from './markdown/compute.md';
 import immutableJS from './markdown/immutableJS.md';
 import faq from './markdown/faq.md';
-import contributors from './markdown/contributors.md';
 import howto from './markdown/howto.md';
 import serverRequests from './markdown/serverRequests.md';
 import base from './markdown/base.md';
@@ -47,16 +47,14 @@ import addonsWhen from './markdown/addons_when.md';
 import addonsInputToState from './markdown/addons_inputToState.md';
 import addonsStateToOutput from './markdown/addons_stateToOutput.md';
 import universal from './markdown/universal.md';
+import snabbdom from './markdown/snabbdom.md';
+import moduleRecorder from './markdown/module_recorder.md';
 
 export default [
   {
     label: 'Cerebral',
     icon: 'home',
     content: Home
-  }, {
-    label: 'Contributors',
-    icon: 'users',
-    content: MTRC(contributors).tree
   }, {
     label: 'Install',
     icon: 'download',
@@ -66,6 +64,11 @@ export default [
         label: 'React',
         icon: 'television',
         content: MTRC(react).tree
+      },
+      {
+        label: 'Snabbdom',
+        icon: 'television',
+        content: MTRC(snabbdom).tree
       },
       {
         label: 'Angular',
@@ -165,14 +168,19 @@ export default [
         content: MTRC(events).tree
       },
       {
-        label: 'Recording',
-        content: MTRC(recording).tree
-      },
-      {
         label: 'Universal',
         content: MTRC(universal).tree
       }
     ]
+  },
+  {
+    label: 'Modules',
+    icon: 'th-large',
+    content: MTRC(modules).tree,
+    subContent: [{
+      label: 'Recorder',
+      content: MTRC(moduleRecorder).tree
+    }]
   },
   {
     label: 'Addons',
@@ -260,5 +268,9 @@ export default [
         content: MTRC(responsibilities).tree
       }
     ]
+  }, {
+    label: 'Contributors',
+    icon: 'users',
+    content: Contributors
   }
 ];

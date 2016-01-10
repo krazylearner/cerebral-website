@@ -5,7 +5,7 @@ Factories are a well known concept in the functional world of JavaScript. It is 
 ```javascript
 function get (url) {
 
-  function action (input, state, output, services) {
+  function action ({services, output}) {
 
     services.ajax(url)
       .then(output.success)
@@ -17,7 +17,7 @@ function get (url) {
 
 }
 
-const signal = [
+const somethingHappened = [
   [
     get('/items'), {
       success: [setItems],
@@ -26,7 +26,9 @@ const signal = [
   ]
 ];
 
-controller.signal('somethingHappened', signal);
+controller.signals({
+  somethingHappened
+});
 ```
 
 ### Custom action names
@@ -37,7 +39,7 @@ Actions created by factories has the same name in the debugger. That can be a bi
 
 function get (url) {
 
-  function action (input, state, output, services) {
+  function action ({services, output}) {
 
     services.ajax(url)
       .then(output.success)

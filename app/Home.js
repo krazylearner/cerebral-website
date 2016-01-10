@@ -2,9 +2,6 @@ var React = require('react');
 var Header = require('./Header.js');
 
 var Home = React.createClass({
-  openIntroduction: function () {
-    window.open('http://www.christianalfoni.com/articles/2015_09_22_Introducing-Cerebral');
-  },
   render: function () {
     return (
       <div>
@@ -47,10 +44,11 @@ var Home = React.createClass({
             <ul className="cerebral-list divided">
               <li><i className="icon icon-television"/> React</li>
               <li><i className="icon icon-television"/> Angular</li>
+              <li><i className="icon icon-television"/> Snabbdom</li>
             </ul>
             <ul className="cerebral-list divided">
               <li><i className="icon icon-database"/> Baobab</li>
-              <li><i className="icon icon-database"/> Tcomb</li>
+              <li><i className="icon icon-database"/> ImmutableJS</li>
             </ul>
           </div>
 
@@ -66,13 +64,18 @@ var Home = React.createClass({
             <ul className="cerebral-list">
             <li>
               <i
+                className="icon icon-file-text link"
+                onClick={() => window.open('https://gist.github.com/christianalfoni/e8dc5bfa79e7289a6258')}> Redux and Cerebral</i>
+            </li>
+            <li>
+              <i
                 className="icon icon-play-circle-o link"
                 onClick={this.props.openVideo.bind(null, 'https://www.youtube.com/embed/BfzjuhX4wJ0?start=20690&end=22260')}> ReactiveConf2015 Talk - <small>30:00</small></i>
             </li>
             <li>
               <i
                 className="icon icon-file-text link"
-                onClick={this.openIntroduction}> Introduction article</i>
+                onClick={() => window.open('http://www.christianalfoni.com/articles/2015_09_22_Introducing-Cerebral')}> Introduction article</i>
             </li>
               <li>
                 <i

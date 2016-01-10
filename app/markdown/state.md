@@ -7,7 +7,7 @@ Let us start with an example:
 
 ```javascript
 
-function myAction (input, state, output) {
+function myAction ({state}) {
 
   state.set('isLoading', false);
 
@@ -21,7 +21,7 @@ use an array.
 
 ```javascript
 
-function myAction (input, state, output) {
+function myAction ({state}) {
 
   state.set(['user', 'isLoading'], false);
 
@@ -35,7 +35,7 @@ strings and arrays here also to be more specific.
 
 ```javascript
 
-function myAction (input, state, output) {
+function myAction ({state}) {
 
   state.get('isLoading'); // false
   state.get(['user', 'isLoading']); // false
@@ -45,11 +45,11 @@ function myAction (input, state, output) {
 
 ### Mutation methods
 The methods you use to change the state of your application are typical mutation methods
-you know from JavaScript. **Note!** These methods are not available when an action runs asynchronously.
+you know from JavaScript. Collection methods however returns the mutated value instead of the value the corresponding Array.prototype method returns. **Note!** These methods are not available when an action runs asynchronously.
 
 ```javascript
 
-function myAction (input, state, output) {
+function myAction ({state}) {
 
   // Set value on property
   state.set('isLoading', false);
@@ -89,7 +89,7 @@ Accessors are methods that lets you grab state from the state store.
 
 ```javascript
 
-function myAction (input, state, output) {
+function myAction ({state}) {
 
   // Get from the top level of tree
   state.get('isLoading'); // false
